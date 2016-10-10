@@ -45,7 +45,7 @@ module Longbow
     if t['icon_url']
       img_path = self.path_for_downloaded_image_from_url directory, target, t['icon_url'], 'icons'
     elsif t['icon_path']
-      img_path = directory + '/' + t['icon_path']
+      img_path = t['icon_path']
     end
 
     # Make directory
