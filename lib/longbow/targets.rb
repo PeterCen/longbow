@@ -5,7 +5,7 @@ require 'utilities'
 
 module Longbow
 
-  def self.update_target directory, target, global_keys, info_keys, icon, launch
+  def self.update_target directory, target, global_keys, info_keys, icon, launch, identifier
     unless directory && target
       Longbow::red '  Invalid parameters. Could not create/update target named: ' + target
       return false
@@ -61,8 +61,8 @@ module Longbow
       main_settings.each_key do |key|
         settings[key] = main_settings[key]
       end
-
       # Plist & Icons
+      settings['PRODUCT_BUNDLE_IDENTIFIER'] = identifier
       settings['INFOPLIST_FILE'] = main_plist.split('/')[0] + '/' + target + '-info.plist'
       settings['ASSETCATALOG_COMPILER_APPICON_NAME'] = Longbow::stripped_text(target) if icon
       settings['ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME'] = Longbow::stripped_text(target) if launch
